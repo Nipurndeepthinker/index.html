@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diwali Greeting</title>
+    <style>
+        body {
+            background-image: url('https://image.freepik.com/free-photo/diwali-diya-with-fire-crackers-rangoli-background_75648-1297.jpg');
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,0.7));
+            z-index: 0;
+        }
+        .container {
+            z-index: 1;
+            position: relative;
+            padding: 20px;
+        }
+        .container h1, .container p, #name-input-section button, #greeting-container h2, #personalized-message {
+            color: white;
+        }
+        input[type="text"], button {
+            padding: 10px 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: 2px solid #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #fbc02d;
+            box-shadow: 0 0 8px #fbc02d;
+        }
+        button {
+            background-color: #fbc02d;
+            color: #26004d;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background-color: #ffeb3b;
+        }
+        #name-input-section, #greeting-container {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        #name-input-section.display-block, #greeting-container.display-block {
+            display: block;
+            opacity: 1;
+        }
+        #name-input-section.hidden, #greeting-container.hidden {
+            display: none;
+        }
+
+        /* Add this style for the credit */
+        #credit {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="name-input-section" class="display-block">
+            <h1>Diwali Celebrations Await!</h1>
+            <p>Enter your name for a festive greeting:</p>
+            <input type="text" id="name-input" placeholder="Your Name">
+            <button onclick="showGreeting()">Light the Diyas</button>
+        </div>
+
+        <div id="greeting-container" class="hidden">
+            <h2>Happy Diwali, <span id="name-placeholder">[Name]</span>!</h2>
+            <p id="personalized-message"></p>
+        </div>
+    </div>
+
+    <!-- Code made by Nipurn Agarwal -->
+    <div id="credit">Code made by Nipurn Agarwal</div>
+
+    <script>
+        function showGreeting() {
+            document.getElementById('name-input-section').classList.add('hidden');
+            setTimeout(function() {
+                var name = document.getElementById('name-input').value || 'Friend';
+                var message = generatePersonalizedMessage(name);
+                document.getElementById('name-placeholder').textContent = name;
+                document.getElementById('personalized-message').textContent = message;
+                document.getElementById('greeting-container').classList.remove('hidden');
+                document.getElementById('greeting-container').classList.add('display-block');
+            }, 500);
+        }
+
+        function generatePersonalizedMessage(name) {
+            var hour = new Date().getHours();
+            if (hour < 12) {
+                return `Good morning, ${name}! Wishing you a day filled with joy and prosperity.`;
+            } else if (hour < 18) {
+                return `Good afternoon, ${name}! May this Diwali light up your life with happiness.`;
+            } else {
+                return `Good evening, ${name}! Enjoy the festive glow of Diwali.`;
+            }
+        }
+    </script>
+</body>
+</html>
